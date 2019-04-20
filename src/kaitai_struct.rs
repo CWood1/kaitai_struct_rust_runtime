@@ -19,6 +19,6 @@ pub trait KaitaiStruct {
         where Self : Sized;
     
     fn read<S: KaitaiStream>(&mut self,
-                             parent: &Option<Box<KaitaiStruct>>,
-                             root: &Option<Box<KaitaiStruct>>) -> std::io::Result<()> where Self : Sized;
+                             stream: &mut S)
+                             -> std::io::Result<()> where Self : Sized;
 }
