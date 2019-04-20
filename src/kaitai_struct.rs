@@ -13,7 +13,7 @@ pub trait KaitaiStruct<'a> {
         Self::new(Box::new(b), None, None)
     }
     
-    fn new(stream: KaitaiStream,
+    fn new(stream: Box<KaitaiStream>,
            parent: Option<&'a KaitaiStruct<'a>>,
            root: Option<&'a KaitaiStruct<'a>>)
            -> std::io::Result<Self>
