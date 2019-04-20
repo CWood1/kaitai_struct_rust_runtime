@@ -13,8 +13,8 @@ pub trait KaitaiStruct<'a> {
     }
     
     fn new<S: KaitaiStream>(stream: &mut S,
-                            parent: &'a Option<Box<KaitaiStruct<'a>>>,
-                            root: &'a Option<Box<KaitaiStruct<'a>>>)
+                            parent: Option<&'a KaitaiStruct<'a>>,
+                            root: Option<&'a KaitaiStruct<'a>>)
                             -> std::io::Result<Self>
         where Self : Sized;
     
