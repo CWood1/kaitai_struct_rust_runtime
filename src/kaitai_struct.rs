@@ -12,13 +12,12 @@ pub trait KaitaiStruct<'a> {
         Self::new(&mut b, None, None)
     }
     
-    fn new<S: KaitaiStream>(stream: &mut S,
+    fn new<S: KaitaiStream>(stream: &'a mut S,
                             parent: Option<&'a KaitaiStruct<'a>>,
                             root: Option<&'a KaitaiStruct<'a>>)
                             -> std::io::Result<Self>
         where Self : Sized;
     
-    fn read<S: KaitaiStream>(&mut self,
-                             stream: &mut S)
-                             -> std::io::Result<()> where Self : Sized;
+    fn read(&mut self)
+            -> std::io::Result<()> where Self : Sized;
 }
