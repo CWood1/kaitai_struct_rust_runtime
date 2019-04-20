@@ -1,15 +1,16 @@
 use std;
+use std::boxed::Box;
 use kaitai_stream::KaitaiStream;
 
 pub trait KaitaiStruct<'a> {
     fn from_file(path: &str) -> std::io::Result<Self> where Self : Sized {
         let mut f = std::fs::File::open(path)?;
-        Self::new(f, None, None)
+        Self::new(Box::new(f), None, None)
     }
     
     fn from_bytes(bytes: Vec<u8>) -> std::io::Result<Self> where Self : Sized {
         let mut b = std::io::Cursor::new(bytes);
-        Self::new(b, None, None)
+        Self::new(Box::new(b), None, None)
     }
     
     fn new(stream: KaitaiStream,
