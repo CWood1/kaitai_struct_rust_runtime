@@ -1,7 +1,7 @@
 use std;
 use kaitai_stream::KaitaiStream;
 
-pub trait KaitaiStruct {
+pub trait KaitaiStruct<'a> {
     fn from_file(path: &str) -> std::io::Result<Self> where Self : Sized {
         let mut f = std::fs::File::open(path)?;
         Self::new(&mut f, &None, &None)
@@ -13,8 +13,8 @@ pub trait KaitaiStruct {
     }
     
     fn new<S: KaitaiStream>(stream: &mut S,
-                            parent: &Option<Box<KaitaiStruct>>,
-                            root: &Option<Box<KaitaiStruct>>)
+                            parent: &'a Option<Box<KaitaiStruct>>,
+                            root: &'a Option<Box<KaitaiStruct>>)
                             -> std::io::Result<Self>
         where Self : Sized;
     
